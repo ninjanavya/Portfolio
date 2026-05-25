@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Code, ExternalLink, GitBranch, Star, Users, Loader2 } from 'lucide-react'
 
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : 'https://portfolio-670r.onrender.com';
+
 export default function ProjectsOverlay() {
   const [githubData, setGithubData] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -9,7 +13,7 @@ export default function ProjectsOverlay() {
   useEffect(() => {
     const fetchGithub = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/github/ninjanavya')
+        const response = await fetch(`${API_BASE}/api/github/ninjanavya`)
         const data = await response.json()
         if (data.status === 'success') {
           setGithubData(data)

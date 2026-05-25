@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Award, BookOpen, Code, ExternalLink, Trophy, Loader2, Star, CheckCircle } from 'lucide-react'
 
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : 'https://portfolio-670r.onrender.com';
+
 export default function CredentialsOverlay() {
   // LeetCode States
   const [lcStats, setLcStats] = useState(null)
@@ -16,7 +20,7 @@ export default function CredentialsOverlay() {
     // Fetch LeetCode
     const fetchLeetcode = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/leetcode/Navya_Ninja')
+        const response = await fetch(`${API_BASE}/api/leetcode/Navya_Ninja`)
         const data = await response.json()
         if (data.status === 'success') {
           setLcStats(data)
@@ -33,7 +37,7 @@ export default function CredentialsOverlay() {
     // Fetch HackerRank
     const fetchHackerrank = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/hackerrank/navya18_kh')
+        const response = await fetch(`${API_BASE}/api/hackerrank/navya18_kh`)
         const data = await response.json()
         if (data.status === 'success') {
           setHrStats(data)

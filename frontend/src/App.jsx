@@ -13,6 +13,10 @@ import CredentialsOverlay from './components/CredentialsOverlay'
 import DancingAvatar from './components/DancingAvatar'
 import ProjectsOverlay from './components/ProjectsOverlay'
 
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : 'https://portfolio-670r.onrender.com';
+
 function CameraController({ activePlanet, currentSection }) {
   useFrame((state) => {
     // Determine base target based on section
@@ -79,7 +83,7 @@ export default function App() {
     setIsTyping(true)
 
     try {
-      const res = await fetch('http://localhost:8000/api/chat', {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: chatMessage, history: updatedHistory })

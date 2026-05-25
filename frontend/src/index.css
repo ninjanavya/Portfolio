@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500&display=swap');
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: rgba(10, 10, 15, 0.45);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.45);
+  --cyan: #00d9ff;
+  --cyan-muted: rgba(0, 217, 255, 0.15);
+  --amber: #f59e0b;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(0, 217, 255, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* For full screen 3D */
+  background-color: var(--bg);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Comfortaa', cursive;
+}
+
+.mono-text {
+  font-family: 'DM Mono', monospace;
+}
+
+/* Glassmorphism UI Overlay */
+.html-overlay {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px;
+  border-radius: 20px;
+  width: 320px;
+  color: var(--text-primary);
+  pointer-events: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.html-backdrop {
+  position: absolute;
+  top: -150vh;
+  left: -150vw;
+  width: 300vw;
+  height: 300vh;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: -1;
+  pointer-events: auto;
+}
+
+.html-overlay h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--amber), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.html-overlay p {
+  line-height: 1.6;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Pill Tags */
+.tag-pill {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: var(--cyan-muted);
+  color: var(--cyan);
+  border: 1px solid var(--border-accent);
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  margin-top: 12px;
+  transition: border-color 0.3s;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+.chat-log {
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 6px;
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+/* Custom scrollbar for chat log */
+.chat-log::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-log::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-log::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 255, 0.3);
+  border-radius: 2px;
+}
+.chat-log::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 217, 255, 0.6);
+}
+
+.chat-msg {
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  max-width: 88%;
+  word-wrap: break-word;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.chat-msg-user {
+  align-self: flex-end;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  color: var(--text-primary);
+  border-bottom-right-radius: 2px;
+}
+
+.chat-msg-ai {
+  align-self: flex-start;
+  background: rgba(0, 217, 255, 0.06);
+  border: 1px solid var(--border-accent);
+  color: var(--text-secondary);
+  border-bottom-left-radius: 2px;
+}
+
+.chat-typing {
+  align-self: flex-start;
+  font-size: 0.78rem;
+  color: var(--cyan);
+  font-family: 'DM Mono', monospace;
+  animation: pulse 1.5s infinite;
+  padding-left: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Animations */
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.icon-float {
+  animation: floatIcon var(--dur, 5s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  position: absolute;
+}

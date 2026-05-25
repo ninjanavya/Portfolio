@@ -1,0 +1,16 @@
+# Node dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/firebase-debug.log
+
+# Python virtual environment & cache
+backend/venv/
+backend/__pycache__/
+backend/.env
+*.pyc
+
+# IDEs and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

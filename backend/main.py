@@ -87,6 +87,7 @@ Certifications & Achievements:
 - **Java Foundation Certification** from Infosys Springboard (Mar 2026).
 - **GenAI Powered Data Analytics Certification** from TATA via Forage (Jul 2025), covering Exploratory Data Analysis, Predictive Delinquency with AI, and Data Storytelling.
 - **Python (Basic)** Skill Certification from HackerRank.
+- **Google Cloud Innovators Plus** community badge from Google Developers (May 2026).
 
 Guidelines:
 - When asked about Navya's background, education, certifications, or projects, respond strictly using these actual facts. Do not make up any other projects.

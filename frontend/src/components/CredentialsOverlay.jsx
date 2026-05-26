@@ -434,6 +434,47 @@ export default function CredentialsOverlay() {
               Exploratory Data Analysis, Predictive Delinquency with AI, and Data Storytelling.
             </div>
           </div>
+
+          {/* Certificate 3: Google Cloud Innovators Plus */}
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            borderRadius: '12px',
+            padding: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+              <div>
+                <h3 style={{ fontSize: '0.9rem', margin: '0 0 2px 0', fontWeight: 'bold', lineHeight: '1.3' }}>Google Cloud Innovators Plus</h3>
+                <div style={{ fontSize: '0.78rem', color: 'var(--cyan)', fontWeight: '500' }}>Google Developers</div>
+              </div>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', flexShrink: 0 }}>May 2026</span>
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+              Official community badge recognizing cloud builders, technical learning paths, and Google Cloud platform innovation.
+            </div>
+            <a 
+              href="https://developers.google.com/profile/badges/community/innovators/cloud/innovators_plus" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                fontSize: '0.75rem',
+                color: 'var(--text-secondary)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                textDecoration: 'none',
+                marginTop: '4px',
+                width: 'fit-content'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.color = 'var(--cyan)'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+            >
+              View Badge <ExternalLink size={11} />
+            </a>
+          </div>
         </div>
       </div>
 

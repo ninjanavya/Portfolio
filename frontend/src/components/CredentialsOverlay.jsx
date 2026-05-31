@@ -374,7 +374,47 @@ export default function CredentialsOverlay() {
             <Award size={22} style={{ color: 'var(--cyan)' }} />
             <h2 style={{ fontSize: '1.15rem', margin: 0, fontFamily: "'Comfortaa', cursive" }}>Certifications</h2>
           </div>
-          
+          {/* Certificate: Claude Code in Action */}
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            borderRadius: '12px',
+            padding: '16px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+              <div>
+                <h3 style={{ fontSize: '0.9rem', margin: '0 0 2px 0', fontWeight: 'bold', lineHeight: '1.3' }}>Claude Code in Action</h3>
+                <div style={{ fontSize: '0.78rem', color: 'var(--cyan)', fontWeight: '500' }}>Anthropic</div>
+              </div>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', flexShrink: 0 }}>May 2026</span>
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+              Official certification verifying proficiency in using Claude Code for agentic software development, command-line operations, and codebase refactoring.
+            </div>
+            <a 
+              href="https://verify.skilljar.com/c/74n9679d6k8c" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                fontSize: '0.75rem',
+                color: 'var(--text-secondary)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                textDecoration: 'none',
+                marginTop: '4px',
+                width: 'fit-content'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.color = 'var(--cyan)'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+            >
+              Verify Credential <ExternalLink size={11} />
+            </a>
+          </div>
+
           {/* Certificate 1: Infosys */}
           <div style={{
             background: 'rgba(255, 255, 255, 0.03)',

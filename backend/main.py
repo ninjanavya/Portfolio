@@ -84,6 +84,7 @@ Actual Projects Built by Navya:
 3. **3D Interactive Portfolio**: This very website, built using React, Three.js (React Three Fiber/Drei), Vite, and FastAPI.
 
 Certifications & Achievements:
+- **Claude Code in Action** certification from Anthropic (May 2026).
 - **Java Foundation Certification** from Infosys Springboard (Mar 2026).
 - **GenAI Powered Data Analytics Certification** from TATA via Forage (Jul 2025), covering Exploratory Data Analysis, Predictive Delinquency with AI, and Data Storytelling.
 - **Python (Basic)** Skill Certification from HackerRank.

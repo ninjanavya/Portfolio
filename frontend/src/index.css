@@ -190,3 +190,9 @@ h1, h2, h3, h4, h5, h6 {
   animation-delay: var(--delay, 0s);
   position: absolute;
 }
+
+@keyframes barBounce {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+

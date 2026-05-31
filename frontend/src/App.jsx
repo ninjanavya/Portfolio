@@ -63,13 +63,68 @@ export default function App() {
   ])
   const [isTyping, setIsTyping] = useState(false)
   const [activePlanetPos, setActivePlanetPos] = useState(null)
+  const [isSpeaking, setIsSpeaking] = useState(false)
   const chatLogRef = useRef(null)
+  const utteranceRef = useRef(null)
 
   useEffect(() => {
     if (chatLogRef.current) {
       chatLogRef.current.scrollTop = chatLogRef.current.scrollHeight
     }
   }, [chatHistory, isTyping])
+
+  useEffect(() => {
+    if (currentSection !== 'about') {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel()
+      }
+      setIsSpeaking(false)
+    }
+  }, [currentSection])
+
+  const toggleSpeakAbout = () => {
+    if ('speechSynthesis' in window) {
+      // Cancel any ongoing speech first to clear the browser queue
+      window.speechSynthesis.cancel()
+      
+      if (isSpeaking) {
+        setIsSpeaking(false)
+        return
+      }
+
+      const text = "I’m a passionate and self-driven developer with a strong interest in full-stack development, AI, and system design. I enjoy building innovative and impactful projects that combine problem-solving, performance optimization, and modern technologies. From intelligent systems to user-focused web applications, I continuously explore new tools and improve my skills through hands-on development and learning."
+      const utterance = new SpeechSynthesisUtterance(text)
+      utteranceRef.current = utterance // Store reference to prevent garbage collection
+      
+      const voices = window.speechSynthesis.getVoices()
+      const voice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Google')) ||
+                    voices.find(v => v.lang.startsWith('en') && v.name.includes('Natural')) ||
+                    voices.find(v => v.lang.startsWith('en'))
+      if (voice) {
+        utterance.voice = voice
+      }
+      
+      utterance.onend = () => {
+        setIsSpeaking(false)
+        utteranceRef.current = null
+      }
+      utterance.onerror = (e) => {
+        console.error("SpeechSynthesis error:", e)
+        setIsSpeaking(false)
+        utteranceRef.current = null
+      }
+      
+      // Delay call slightly to ensure clean cancellation in Chrome/Edge/Firefox
+      setTimeout(() => {
+        window.speechSynthesis.speak(utterance)
+        setIsSpeaking(true)
+      }, 50)
+    } else {
+      alert("Your browser does not support Speech Synthesis.")
+    }
+  }
+
+
 
   const handleChatSubmit = async (e) => {
     e.preventDefault()
@@ -163,7 +218,48 @@ export default function App() {
                 boxShadow: '0 20px 40px rgba(0, 217, 255, 0.05)'
               }}
             >
-              <h1 style={{ fontSize: '2.5rem', margin: '0 0 20px 0', color: 'var(--cyan)', fontFamily: "'Comfortaa', cursive" }}>About Me</h1>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', gap: '15px' }}>
+                <h1 style={{ fontSize: '2.5rem', margin: 0, color: 'var(--cyan)', fontFamily: "'Comfortaa', cursive" }}>About Me</h1>
+                <button
+                  onClick={toggleSpeakAbout}
+                  style={{
+                    background: isSpeaking ? 'rgba(0, 217, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+                    border: isSpeaking ? '1px solid var(--cyan)' : '1px solid var(--border)',
+                    borderRadius: '30px',
+                    padding: '8px 18px',
+                    color: isSpeaking ? 'var(--cyan)' : 'var(--text-primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    cursor: 'pointer',
+                    pointerEvents: 'auto',
+                    fontSize: '0.9rem',
+                    fontFamily: "'DM Sans', sans-serif",
+                    transition: 'all 0.3s ease',
+                    boxShadow: isSpeaking ? '0 0 15px rgba(0, 217, 255, 0.3)' : 'none'
+                  }}
+                >
+                  {isSpeaking ? (
+                    <>
+                      <span style={{ position: 'relative', width: '12px', height: '12px', display: 'inline-flex', gap: '2.5px', alignItems: 'flex-end' }}>
+                        <span style={{ width: '2.5px', height: '100%', background: 'var(--cyan)', borderRadius: '1px', animation: 'barBounce 0.8s ease-in-out infinite alternate', animationDelay: '0.1s' }} />
+                        <span style={{ width: '2.5px', height: '60%', background: 'var(--cyan)', borderRadius: '1px', animation: 'barBounce 0.8s ease-in-out infinite alternate', animationDelay: '0.3s' }} />
+                        <span style={{ width: '2.5px', height: '80%', background: 'var(--cyan)', borderRadius: '1px', animation: 'barBounce 0.8s ease-in-out infinite alternate', animationDelay: '0.5s' }} />
+                      </span>
+                      Stop Bot
+                    </>
+                  ) : (
+                    <>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                      </svg>
+                      Let Bot Speak
+                    </>
+                  )}
+                </button>
+              </div>
+
               
               <div style={{ 
                 color: 'var(--text-primary)', 
@@ -317,7 +413,8 @@ export default function App() {
                 <meshStandardMaterial color="#10b981" wireframe={true} emissive="#10b981" emissiveIntensity={0.5} transparent opacity={0.3} />
               </mesh>
               {/* Dancing Avatar */}
-              <DancingAvatar position={[0, -1.8, 0]} scale={0.9} />
+              <DancingAvatar position={[0, -1.8, 0]} scale={0.9} isSpeaking={isSpeaking} />
+
             </group>
           </Float>
         </group>
